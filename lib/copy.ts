@@ -195,8 +195,6 @@ export const ABOUT_FAQS: Faq[] = [
 
 export const CATALOG_INTRO = [
   "A directory of cookware, water filters, personal care, food storage, textiles, and cleaning products gathered from the original non-toxic products page and from product links inside the guides.",
-  "Nothing is sold on this website. Buy on Amazon opens the listing, and you check out there. As an Amazon Associate I earn from qualifying purchases. Prices are not listed here because they change on Amazon.",
-  "Three listings were unavailable on Amazon when the catalog was compiled on October 7, 2026. They stay in the directory with a clear unavailable label so you can check whether they have returned. An off-topic watch band and a leftover template block from the old page are not included.",
 ];
 
 export const CATALOG_FAQS: Faq[] = [
