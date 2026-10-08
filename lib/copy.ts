@@ -162,14 +162,6 @@ export const ABOUT_SECTIONS: CopySection[] = [
     heading: "What you can do with this site",
     paragraphs: [
       "Read the research roundups and the practical articles on drinking water, cookware, food packaging, textiles, and personal care. Then use the non-toxic products directory to open the Amazon listing behind each recommendation. The directory covers cookware, water filtration, an air purifier, personal care, food storage, textiles, and cleaning.",
-      "The original about page was only a list of search phrases. This page keeps those topics — forever chemicals, PFAS in drinking water, cookware, dental floss, parchment paper, laundry, food storage, and children's products — as the subjects the articles and product directory actually cover.",
-    ],
-  },
-  {
-    heading: "Products, newsletter, and contact",
-    paragraphs: [
-      "This site does not sell products and does not run a cart. Each product page links to Amazon, where checkout and delivery happen. As an Amazon Associate I earn from qualifying purchases.",
-      "The newsletter is optional and is hosted on beehiiv at https://nomoreforeverchemicals.beehiiv.com. It is described on the original site as twice a month. Questions can be sent to nomoreforeverchemicals@gmail.com.",
       "The site is operated by FortuneCreations, LLC.",
     ],
   },
