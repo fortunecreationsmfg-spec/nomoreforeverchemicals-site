@@ -1,0 +1,158 @@
+@import "tailwindcss";
+
+:root {
+  --forest: #1a2e26;
+  --muted: #3a4d45;
+  --cream: #f7f5f0;
+  --beige: #ebe8df;
+  --line: #dcd8ca;
+  --teal: #20b2aa;
+  --teal-soft: #d1e9e9;
+  --sage: #a9cba9;
+  --peach: #fdeedc;
+  --white: #ffffff;
+}
+
+@theme inline {
+  --color-forest: var(--forest);
+  --color-muted: var(--muted);
+  --color-cream: var(--cream);
+  --color-beige: var(--beige);
+  --color-line: var(--line);
+  --color-teal: var(--teal);
+  --color-teal-soft: var(--teal-soft);
+  --color-sage: var(--sage);
+  --color-peach: var(--peach);
+  --font-sans: var(--font-onest);
+  --font-display: var(--font-bricolage);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--cream);
+  color: var(--forest);
+  font-family: var(--font-onest), Onest, sans-serif;
+}
+
+.font-display {
+  font-family: var(--font-bricolage), "Bricolage Grotesque", sans-serif;
+}
+
+.btn-primary,
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9999px;
+  padding: 0.75rem 1.2rem;
+  font-size: 0.95rem;
+  font-weight: 650;
+  line-height: 1.2;
+  text-align: center;
+  transition: transform 120ms ease, background-color 120ms ease;
+}
+
+.btn-primary {
+  background: var(--teal);
+  color: var(--forest);
+}
+
+.btn-secondary {
+  background: transparent;
+  color: var(--forest);
+  border: 1px solid var(--line);
+}
+
+.btn-primary:hover,
+.btn-secondary:hover {
+  transform: translateY(-1px);
+}
+
+a:focus-visible,
+button:focus-visible,
+summary:focus-visible,
+input:focus-visible {
+  outline: 2px solid var(--teal);
+  outline-offset: 3px;
+}
+
+.markdown {
+  color: var(--forest);
+  font-size: 1.05rem;
+  line-height: 1.7;
+}
+
+.markdown > * + * {
+  margin-top: 1rem;
+}
+
+.markdown h2,
+.markdown h3,
+.markdown h4 {
+  font-family: var(--font-bricolage), "Bricolage Grotesque", sans-serif;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+
+.markdown h2 {
+  margin-top: 2.2rem;
+  font-size: 1.7rem;
+}
+
+.markdown h3 {
+  margin-top: 1.6rem;
+  font-size: 1.25rem;
+}
+
+.markdown a {
+  color: var(--forest);
+  text-decoration: underline;
+  text-decoration-color: var(--teal);
+  text-underline-offset: 3px;
+}
+
+.markdown ul,
+.markdown ol {
+  padding-left: 1.25rem;
+}
+
+.markdown ul {
+  list-style: disc;
+}
+
+.markdown ol {
+  list-style: decimal;
+}
+
+.markdown li + li {
+  margin-top: 0.35rem;
+}
+
+.markdown blockquote {
+  border-left: 3px solid var(--teal);
+  background: var(--beige);
+  padding: 0.9rem 1rem;
+  border-radius: 0 1rem 1rem 0;
+}
+
+.markdown img {
+  border-radius: 1rem;
+}
+
+.markdown strong {
+  font-weight: 650;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .btn-primary:hover,
+  .btn-secondary:hover {
+    transform: none;
+  }
+}
