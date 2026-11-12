@@ -65,6 +65,13 @@ export const viewport: Viewport = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={`${display.variable} ${body.variable} h-full antialiased`}>
+      <head>
+        <meta
+          name="impact-site-verification"
+          // Impact.com reads this non-standard attribute. The Metadata API only emits `content`.
+          {...{ value: "b571fac6-9edf-4985-b5ab-153c59718ed7" }}
+        />
+      </head>
       <body className="flex min-h-full flex-col bg-cream font-sans text-forest">
         <JsonLd data={organizationJsonLd()} />
         <SiteShell>{children}</SiteShell>
