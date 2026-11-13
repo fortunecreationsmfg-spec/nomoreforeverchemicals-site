@@ -5,6 +5,7 @@ import { JsonLd } from "@/components/JsonLd";
 import { SiteShell } from "@/components/SiteShell";
 import { BRAND, CONTACT_EMAIL, DEFAULT_OG_IMAGE, LEGAL_NAME, SITE_URL } from "@/lib/constants";
 import { organizationJsonLd } from "@/lib/schema";
+import { announcementBootScript, announcementPhase } from "@/lib/seasonal";
 import "./globals.css";
 
 const display = Bricolage_Grotesque({
@@ -63,14 +64,19 @@ export const viewport: Viewport = {
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
+  const showAnnouncement = announcementPhase() !== "off";
+
   return (
-    <html lang="en" className={`${display.variable} ${body.variable} h-full antialiased`}>
+    <html lang="en" className={`${display.variable} ${body.variable} h-full antialiased`} suppressHydrationWarning>
       <head>
         <meta
           name="impact-site-verification"
           // Impact.com reads this non-standard attribute. The Metadata API only emits `content`.
           {...{ value: "b571fac6-9edf-4985-b5ab-153c59718ed7" }}
         />
+        {showAnnouncement ? (
+          <script id="deals-banner-boot" dangerouslySetInnerHTML={{ __html: announcementBootScript() }} />
+        ) : null}
       </head>
       <body className="flex min-h-full flex-col bg-cream font-sans text-forest">
         <JsonLd data={organizationJsonLd()} />
