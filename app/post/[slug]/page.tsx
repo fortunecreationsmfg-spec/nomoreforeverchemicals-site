@@ -11,11 +11,11 @@ import { PostBrandOffers } from "@/components/PostBrandOffers";
 import { SeasonalDealBanner } from "@/components/SeasonalDealLink";
 import { directOffersInText } from "@/lib/brandAffiliates";
 import { NEWSLETTER_URL } from "@/lib/constants";
-import { getAllProducts } from "@/lib/products";
+import { getAllProducts, getProduct } from "@/lib/products";
 import { isBlackFridayPost } from "@/lib/seasonal";
 import { formatDate, readingMinutes } from "@/lib/format";
 import { categorySlug, getAllPosts, getPost } from "@/lib/posts";
-import { blogPostingJsonLd } from "@/lib/schema";
+import { blogPostingJsonLd, itemListJsonLd, productJsonLd } from "@/lib/schema";
 import { pageMetadata } from "@/lib/seo";
 
 export function generateStaticParams() {
@@ -46,6 +46,9 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
   const post = getPost(slug);
   if (!post) notFound();
   const minutes = readingMinutes(post.body);
+  const featuredProducts = post.productSlugs
+    .map((productSlug) => getProduct(productSlug))
+    .filter((product) => product !== null);
   const brandOffers = directOffersInText(post.body, getAllProducts());
   const showDisclosure = post.hasAffiliateLinks || brandOffers.length > 0;
   const crumbs = [
@@ -129,6 +132,12 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
         </div>
       </aside>
       <JsonLd data={blogPostingJsonLd(post)} />
+      {featuredProducts.length ? (
+        <JsonLd data={itemListJsonLd(featuredProducts, post.title)} />
+      ) : null}
+      {featuredProducts.map((product) => (
+        <JsonLd key={product.slug} data={productJsonLd(product)} />
+      ))}
     </article>
   );
 }
