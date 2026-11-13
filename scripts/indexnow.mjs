@@ -27,6 +27,7 @@ function slugify(value) {
 function urlsFromRepo() {
   const paths = [
     "/",
+    "/black-friday-pfas-free-deals",
     "/blog",
     "/non-toxic-products",
     "/what-is-this-site-about",

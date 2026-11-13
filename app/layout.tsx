@@ -26,13 +26,13 @@ export const metadata: Metadata = {
     template: `%s | ${BRAND}`,
   },
   description:
-    "Protect your family from PFAS. Guides to forever chemicals, plus a directory of cookware, water filters, and other products that link to Amazon.",
+    "Protect your family from PFAS. Guides to forever chemicals, plus a directory of cookware, water filters, and other products. Some links earn a commission from Amazon and from brand partners such as iSpring and Purewell.",
   applicationName: BRAND,
   authors: [{ name: LEGAL_NAME, url: SITE_URL }],
   openGraph: {
     title: "PFAS Awareness & Solutions | No More Forever Chemicals",
     description:
-      "Protect your family from PFAS. Guides to forever chemicals and a directory of products that link to Amazon.",
+      "Protect your family from PFAS. Guides to forever chemicals and a directory of products with affiliate links to Amazon and to brand partners such as iSpring and Purewell.",
     url: SITE_URL,
     siteName: BRAND,
     locale: "en_US",
@@ -43,7 +43,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "PFAS Awareness & Solutions | No More Forever Chemicals",
     description:
-      "Protect your family from PFAS. Guides to forever chemicals and a directory of products that link to Amazon.",
+      "Protect your family from PFAS. Guides to forever chemicals and a directory of products with affiliate links to Amazon and to brand partners such as iSpring and Purewell.",
     images: [DEFAULT_OG_IMAGE],
   },
   alternates: {

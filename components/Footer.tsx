@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { BrandMark } from "@/components/BrandMark";
 import { Disclosure } from "@/components/Disclosure";
+import { SeasonalDealLink } from "@/components/SeasonalDealLink";
 import {
   BRAND,
   CONTACT_EMAIL,
@@ -33,6 +34,10 @@ export function Footer() {
               </Link>
             </p>
           ))}
+          <SeasonalDealLink
+            asParagraph
+            className="text-sage underline-offset-4 hover:text-white hover:underline"
+          />
         </div>
 
         <div className="text-sm leading-7">

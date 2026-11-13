@@ -1,4 +1,5 @@
 import type { MetadataRoute } from "next";
+import { DEALS_CHECKED, DEALS_PATH } from "@/lib/blackFriday";
 import { SITE_UPDATED, SITE_URL } from "@/lib/constants";
 import { getCategories, getAllPosts } from "@/lib/posts";
 import { getAllProducts } from "@/lib/products";
@@ -11,6 +12,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const staticPages: MetadataRoute.Sitemap = [
     { url: SITE_URL, lastModified: SITE_UPDATED, changeFrequency: "weekly", priority: 1 },
     { url: `${SITE_URL}/blog`, lastModified: latest, changeFrequency: "weekly", priority: 0.9 },
+    {
+      url: `${SITE_URL}${DEALS_PATH}`,
+      lastModified: DEALS_CHECKED,
+      changeFrequency: "weekly",
+      priority: 0.8,
+    },
     { url: `${SITE_URL}/non-toxic-products`, lastModified: SITE_UPDATED, changeFrequency: "weekly", priority: 0.9 },
     { url: `${SITE_URL}/what-is-this-site-about`, lastModified: SITE_UPDATED, changeFrequency: "yearly", priority: 0.6 },
     { url: `${SITE_URL}/privacy-policy`, lastModified: SITE_UPDATED, changeFrequency: "yearly", priority: 0.3 },

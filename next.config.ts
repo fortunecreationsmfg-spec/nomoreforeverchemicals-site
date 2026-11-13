@@ -23,6 +23,7 @@ const nextConfig: NextConfig = {
       { source: "/non-toxic-products.md", destination: "/markdown/catalog" },
       { source: "/what-is-this-site-about.md", destination: "/markdown/about" },
       { source: "/privacy-policy.md", destination: "/markdown/privacy" },
+      { source: "/black-friday-pfas-free-deals.md", destination: "/markdown/black-friday" },
     ];
   },
 };

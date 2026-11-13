@@ -4,6 +4,7 @@ import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { FaqList } from "@/components/FaqList";
 import { PostCard } from "@/components/PostCard";
 import { Quiz } from "@/components/Quiz";
+import { SeasonalDealLink } from "@/components/SeasonalDealLink";
 import { CONTACT_EMAIL, NEWSLETTER_URL, SITE_UPDATED } from "@/lib/constants";
 import { GALLERY, GUIDE_CARDS, HOME_FAQS, IMPACT, WHERE_FOUND } from "@/lib/copy";
 import { formatDate } from "@/lib/format";
@@ -37,6 +38,7 @@ export function HomeSections() {
             <a href={NEWSLETTER_URL} className="btn-secondary" target="_blank" rel="noopener noreferrer">
               Newsletter
             </a>
+            <SeasonalDealLink className="btn-secondary">PFAS-free Black Friday deals</SeasonalDealLink>
           </div>
         </div>
         <Quiz />

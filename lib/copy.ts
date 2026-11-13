@@ -161,7 +161,7 @@ export const ABOUT_SECTIONS: CopySection[] = [
   {
     heading: "What you can do with this site",
     paragraphs: [
-      "Read the research roundups and the practical articles on drinking water, cookware, food packaging, textiles, and personal care. Then use the non-toxic products directory to open the Amazon listing behind each recommendation. The directory covers cookware, water filtration, an air purifier, personal care, food storage, textiles, and cleaning.",
+      "Read the research roundups and the practical articles on drinking water, cookware, food packaging, textiles, and personal care. Then use the non-toxic products directory. Most listings open Amazon. iSpring and Purewell listings also include a direct brand link. The directory covers cookware, water filtration, an air purifier, personal care, food storage, textiles, and cleaning.",
       "The site is operated by FortuneCreations, LLC.",
     ],
   },
@@ -171,12 +171,12 @@ export const ABOUT_FAQS: Faq[] = [
   {
     question: "What is this site about?",
     answer:
-      "It is a guide to PFAS, also called forever chemicals: what they are, where they show up in a home, what the articles report from health research, and which Amazon listings the directory links to as swaps.",
+      "It is a guide to PFAS, also called forever chemicals: what they are, where they show up in a home, what the articles report from health research, and which product listings the directory links to as swaps.",
   },
   {
     question: "Does this site sell the products it lists?",
     answer:
-      "No. Product pages send you to Amazon, where you check out. As an Amazon Associate I earn from qualifying purchases.",
+      "This site does not take payment or ship orders. Most product pages send you to Amazon. iSpring and Purewell pages also include a button to the brand. As an Amazon Associate I earn from qualifying purchases. We also earn commissions from brand partners such as iSpring and Purewell at no extra cost to you.",
   },
   {
     question: "Who operates No More Forever Chemicals?",
@@ -193,12 +193,12 @@ export const CATALOG_FAQS: Faq[] = [
   {
     question: "Where do I buy these products?",
     answer:
-      "On Amazon. Each product page has a Buy on Amazon link. This website does not take payment or ship orders.",
+      "Most items are on Amazon, and each product page keeps that link. iSpring and Purewell pages add a Buy direct button to the brand. This website does not take payment or ship orders.",
   },
   {
     question: "Why are there no prices?",
     answer:
-      "Amazon prices change, and the Associates program discourages publishing a fixed price. Open the Amazon listing to see the current price.",
+      "Prices change, and this site does not publish a fixed price. Open the Amazon listing, or the brand page when a direct button is there, to see the current price.",
   },
   {
     question: "What does currently unavailable mean?",
@@ -208,15 +208,15 @@ export const CATALOG_FAQS: Faq[] = [
   {
     question: "How do the affiliate links work?",
     answer:
-      "Links use the Amazon Associates tag nomoreforev05-20 unless a different tag is set when the site is built. As an Amazon Associate I earn from qualifying purchases.",
+      "Amazon links use the Associates tag nomoreforev05-20 unless a different tag is set when the site is built. iSpring links add a referral parameter on ispringfilter.com. Purewell links use a PartnerBoost tracking URL that opens purewell.com. As an Amazon Associate I earn from qualifying purchases. We also earn commissions from brand partners such as iSpring and Purewell at no extra cost to you.",
   },
 ];
 
 export const PRIVACY_SECTIONS: CopySection[] = [
   {
     paragraphs: [
-      "No More Forever Chemicals is a website operated by FortuneCreations, LLC (\"we\"). The site publishes guides about PFAS and links to products on Amazon. It also points to an optional newsletter hosted by beehiiv. This policy explains what happens when you read the site, email us, or follow those links.",
-      "Last updated October 8, 2026.",
+      "No More Forever Chemicals is a website operated by FortuneCreations, LLC (\"we\"). The site publishes guides about PFAS and links to products on Amazon and, for iSpring and Purewell, on the brand's own site. It also points to an optional newsletter hosted by beehiiv. This policy explains what happens when you read the site, email us, or follow those links.",
+      "Last updated November 13, 2026.",
     ],
   },
   {
@@ -232,6 +232,7 @@ export const PRIVACY_SECTIONS: CopySection[] = [
     heading: "Amazon Associates",
     paragraphs: [
       "Some links go to Amazon with our Associates tag. As an Amazon Associate I earn from qualifying purchases. When you follow a product link, Amazon receives the fact that you came from this site. Anything you do after that, including browsing, signing in, and paying, is handled by Amazon under Amazon's privacy policy at https://www.amazon.com/privacy. We do not see your Amazon account or your order details.",
+      "Some product links go to iSpring and Purewell. iSpring links add a referral code on ispringfilter.com. Purewell links use a PartnerBoost tracking URL that then opens purewell.com. We earn a commission from those brands at no extra cost to you. iSpring, Purewell, and PartnerBoost receive the fact that you came from this site. What you do on their sites is covered by their own privacy policies. We do not see your account or your order. AquaTru and AirDoctor applications are pending, so those products still link only to Amazon.",
     ],
   },
   {
@@ -243,13 +244,13 @@ export const PRIVACY_SECTIONS: CopySection[] = [
   {
     heading: "Sharing",
     paragraphs: [
-      "We share information only with the services that make the site work, and only for that purpose: Vercel hosts the site and provides analytics (https://vercel.com/legal/privacy-policy), Amazon receives affiliate click-throughs, and beehiiv receives newsletter signups that you submit on the beehiiv site. We may also share information if the law requires it, or if FortuneCreations, LLC is sold and the website transfers with it.",
+      "We share information only with the services that make the site work, and only for that purpose: Vercel hosts the site and provides analytics (https://vercel.com/legal/privacy-policy), Amazon receives affiliate click-throughs, iSpring and Purewell (through PartnerBoost) receive brand-affiliate click-throughs, and beehiiv receives newsletter signups that you submit on the beehiiv site. We may also share information if the law requires it, or if FortuneCreations, LLC is sold and the website transfers with it.",
     ],
   },
   {
     heading: "Cookies",
     paragraphs: [
-      "This site does not set advertising cookies and does not ask you to accept a cookie banner before you can read. Your browser, Vercel Analytics, and the third-party sites you choose to open (Amazon and beehiiv) may store their own technical data. You can block cookies in your browser.",
+      "This site does not set advertising cookies and does not ask you to accept a cookie banner before you can read. Your browser, Vercel Analytics, and the third-party sites you choose to open (Amazon, iSpring, Purewell, PartnerBoost, and beehiiv) may store their own technical data. You can block cookies in your browser.",
     ],
   },
   {

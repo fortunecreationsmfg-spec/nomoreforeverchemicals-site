@@ -5,7 +5,8 @@ import { notFound } from "next/navigation";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { Disclosure } from "@/components/Disclosure";
 import { JsonLd } from "@/components/JsonLd";
-import { buyUrl } from "@/lib/amazon";
+import { AffiliateButtons } from "@/components/AffiliateButtons";
+import { directOfferForProduct } from "@/lib/brandAffiliates";
 import { SITE_UPDATED } from "@/lib/constants";
 import { formatDate } from "@/lib/format";
 import { categoryAnchor, getAllProducts, getProduct } from "@/lib/products";
@@ -38,7 +39,7 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
   const { slug } = await params;
   const product = getProduct(slug);
   if (!product) notFound();
-  const href = buyUrl(product);
+  const direct = directOfferForProduct(product);
   const unavailable = product.availability === "unavailable";
 
   return (
@@ -101,16 +102,23 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
           </dl>
           {unavailable ? (
             <p className="mt-4 rounded-2xl bg-peach px-4 py-3 text-sm leading-6">
-              Marked unavailable on Amazon when this catalog was compiled on October 7, 2026. The button still opens Amazon so you can check the live listing.
+              {direct
+                ? "This listing was marked unavailable on Amazon when the catalog was compiled on October 7, 2026. The brand button opens the maker's site. The Amazon button opens the listing so you can check current stock."
+                : "Marked unavailable on Amazon when this catalog was compiled on October 7, 2026. The button still opens Amazon so you can check the live listing."}
             </p>
           ) : null}
           {product.labelNote ? <p className="mt-4 text-sm leading-6 text-muted">{product.labelNote}</p> : null}
           <p className="mt-4 leading-7">{product.description}</p>
-          <a href={href} className="btn-primary mt-6" target="_blank" rel="sponsored nofollow noopener">
-            {product.asin ? (unavailable ? "Check on Amazon" : "Buy on Amazon") : "View the list on Amazon"}
-          </a>
+          <div className="mt-6">
+            <AffiliateButtons product={product} fallback />
+          </div>
+          {direct?.promo ? <p className="mt-4 text-sm leading-6 text-muted">{direct.promo}</p> : null}
           <Disclosure className="mt-4" />
-          <p className="mt-2 text-sm text-muted">You check out on Amazon. This site does not take payment.</p>
+          <p className="mt-2 text-sm text-muted">
+            {direct
+              ? "You check out on the brand site or on Amazon. This site does not take payment."
+              : "You check out on Amazon. This site does not take payment."}
+          </p>
         </div>
       </div>
       {product.features.length ? (

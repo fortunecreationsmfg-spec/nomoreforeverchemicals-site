@@ -4,12 +4,13 @@ import type { ReactNode } from "react";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import remarkGfm from "remark-gfm";
 import { withAmazonTag } from "@/lib/amazon";
+import { isSponsoredHref, trackBrandUrl } from "@/lib/brandAffiliates";
 import { imageMeta } from "@/lib/image-meta";
 
 function MdLink({ href, children }: { href?: string; children?: ReactNode }) {
   if (!href) return <span>{children}</span>;
-  const url = withAmazonTag(href);
-  const amazon = /amazon\.com|amzn\.to/i.test(url);
+  const url = trackBrandUrl(withAmazonTag(href));
+  const sponsored = isSponsoredHref(url);
   if (url.startsWith("/")) {
     return (
       <Link href={url} className="underline decoration-teal underline-offset-4">
@@ -21,7 +22,7 @@ function MdLink({ href, children }: { href?: string; children?: ReactNode }) {
     <a
       href={url}
       target="_blank"
-      rel={amazon ? "sponsored nofollow noopener" : "noopener noreferrer"}
+      rel={sponsored ? "sponsored nofollow noopener" : "noopener noreferrer"}
     >
       {children}
     </a>

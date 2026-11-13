@@ -1,22 +1,25 @@
+import { isSponsoredHref, trackBrandUrl } from "@/lib/brandAffiliates";
+
 export function RichText({ text }: { text: string }) {
   const parts = text.split(/(https?:\/\/[^\s]+|[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,})/gi);
   return (
     <p>
       {parts.map((part, index) => {
         if (part.startsWith("http")) {
-          const href = part.replace(/[.,)]$/, "");
-          const amazon = href.includes("amazon.com");
+          const bare = part.replace(/[.,)]$/, "");
+          const href = trackBrandUrl(bare);
+          const sponsored = isSponsoredHref(href);
           return (
             <span key={`${href}-${index}`}>
               <a
                 href={href}
                 className="underline decoration-teal underline-offset-4"
                 target="_blank"
-                rel={amazon ? "sponsored nofollow noopener" : "noopener noreferrer"}
+                rel={sponsored ? "sponsored nofollow noopener" : "noopener noreferrer"}
               >
-                {href}
+                {bare}
               </a>
-              {part.slice(href.length)}
+              {part.slice(bare.length)}
             </span>
           );
         }
