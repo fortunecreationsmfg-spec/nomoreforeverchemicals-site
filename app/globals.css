@@ -79,6 +79,39 @@ input:focus-visible {
   outline-offset: 3px;
 }
 
+/* Both lines ship in the HTML. The boot script picks one before paint so the bar does not change height or text after load. */
+.deals-banner .banner-copy-cyber {
+  display: none;
+}
+
+.deals-banner[data-phase="cyber-monday"] .banner-copy-default {
+  display: none;
+}
+
+.deals-banner[data-phase="cyber-monday"] .banner-copy-cyber {
+  display: inline;
+}
+
+html[data-deals-banner="cyber-monday"] .deals-banner .banner-copy-default {
+  display: none;
+}
+
+html[data-deals-banner="cyber-monday"] .deals-banner .banner-copy-cyber {
+  display: inline;
+}
+
+html[data-deals-banner="black-friday"] .deals-banner .banner-copy-cyber {
+  display: none;
+}
+
+html[data-deals-banner="black-friday"] .deals-banner .banner-copy-default {
+  display: inline;
+}
+
+html[data-deals-banner="off"] .deals-banner {
+  display: none !important;
+}
+
 .markdown {
   color: var(--forest);
   font-size: 1.05rem;
