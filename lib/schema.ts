@@ -1,4 +1,5 @@
 import { buyUrl } from "@/lib/amazon";
+import { directOfferForProduct } from "@/lib/brandAffiliates";
 import {
   AUTHOR_NAME,
   BRAND,
@@ -34,7 +35,7 @@ export function organizationJsonLd() {
         name: BRAND,
         url: SITE_URL,
         description:
-          "Guides to PFAS, also called forever chemicals, and a directory of products that link to Amazon.",
+          "Guides to PFAS, also called forever chemicals, and a directory of products. Some links earn a commission from Amazon and from brand partners such as iSpring and Purewell.",
         publisher: { "@id": `${SITE_URL}/#organization` },
       },
     ],
@@ -91,6 +92,11 @@ export function blogPostingJsonLd(post: Post) {
 }
 
 export function productJsonLd(product: Product) {
+  const direct = directOfferForProduct(product);
+  const amazonAvailability =
+    product.availability === "in_stock"
+      ? "https://schema.org/InStock"
+      : "https://schema.org/OutOfStock";
   return {
     "@context": "https://schema.org",
     "@type": "Product",
@@ -101,15 +107,24 @@ export function productJsonLd(product: Product) {
     ...(product.brand ? { brand: { "@type": "Brand", name: product.brand } } : {}),
     ...(product.asin ? { sku: product.asin } : {}),
     ...(product.image ? { image: absoluteUrl(product.image) } : {}),
-    offers: {
-      "@type": "Offer",
-      url: buyUrl(product),
-      availability:
-        product.availability === "in_stock"
-          ? "https://schema.org/InStock"
-          : "https://schema.org/OutOfStock",
-      seller: { "@type": "Organization", name: "Amazon" },
-    },
+    offers: [
+      {
+        "@type": "Offer",
+        url: buyUrl(product),
+        availability: amazonAvailability,
+        seller: { "@type": "Organization", name: "Amazon" },
+      },
+      ...(direct
+        ? [
+            {
+              "@type": "Offer",
+              url: direct.href,
+              availability: "https://schema.org/InStock",
+              seller: { "@type": "Organization", name: direct.label },
+            },
+          ]
+        : []),
+    ],
   };
 }
 

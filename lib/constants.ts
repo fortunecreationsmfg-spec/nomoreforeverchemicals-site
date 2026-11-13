@@ -6,10 +6,12 @@ export const SITE_URL = "https://www.nomoreforeverchemicals.com";
 export const NEWSLETTER_URL = "https://nomoreforeverchemicals.beehiiv.com";
 export const PINTEREST_URL = "https://pin.it/7bryiRtjS";
 export const SITE_UPDATED = "2026-10-08";
+export const PRIVACY_UPDATED = "2026-11-13";
 export const RSS_TITLE = "nomoreforeverchemicals.com";
 export const RSS_DESCRIPTION = "Clean Living, No Forever Chemicals";
 export const TAGLINE = "Empowering a PFAS-free future.";
-export const AMAZON_DISCLOSURE = "As an Amazon Associate I earn from qualifying purchases.";
+export const AMAZON_DISCLOSURE =
+  "As an Amazon Associate I earn from qualifying purchases. We earn commissions from Amazon and from brand partners such as iSpring and Purewell at no extra cost to you.";
 
 /** Default Associates tag. Override at build time with NEXT_PUBLIC_AMAZON_TAG. */
 export const AMAZON_TAG = process.env.NEXT_PUBLIC_AMAZON_TAG?.trim() || "nomoreforev05-20";

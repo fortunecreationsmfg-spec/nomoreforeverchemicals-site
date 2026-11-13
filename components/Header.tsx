@@ -4,7 +4,9 @@ import { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { BrandMark } from "@/components/BrandMark";
+import { SeasonalDealLink } from "@/components/SeasonalDealLink";
 import { BRAND, NAV, NEWSLETTER_URL } from "@/lib/constants";
+import { BLACK_FRIDAY_PATH } from "@/lib/seasonal";
 
 function active(href: string, pathname: string): boolean {
   if (href === "/") return pathname === "/";
@@ -40,6 +42,9 @@ export function Header() {
               {item.label}
             </Link>
           ))}
+          <SeasonalDealLink
+            className={pathname === BLACK_FRIDAY_PATH ? "text-forest" : "hover:text-forest"}
+          />
         </nav>
 
         <div className="flex items-center gap-2">
@@ -67,6 +72,7 @@ export function Header() {
                 {item.label}
               </Link>
             ))}
+            <SeasonalDealLink onClick={() => setOpen(false)} />
             <a href={NEWSLETTER_URL} target="_blank" rel="noopener noreferrer" className="font-semibold">
               Newsletter
             </a>

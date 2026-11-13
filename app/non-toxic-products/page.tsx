@@ -14,7 +14,7 @@ import { pageMetadata } from "@/lib/seo";
 export const metadata = pageMetadata({
   title: "Non-Toxic Products",
   description:
-    "PFAS-conscious cookware, water filters, personal care, food storage, and cleaning products. Each item links to Amazon, where you check out.",
+    "PFAS-conscious cookware, water filters, personal care, food storage, and cleaning products. Listings link to Amazon. iSpring and Purewell also link to the brand.",
   path: "/non-toxic-products",
 });
 

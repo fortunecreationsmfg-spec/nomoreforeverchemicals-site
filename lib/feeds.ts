@@ -1,9 +1,21 @@
 import { buyUrl } from "@/lib/amazon";
 import {
+  BLACK_FRIDAY_FAQS,
+  DEAL_GROUPS,
+  DEAL_GUIDES,
+  DEALS_CHECKED,
+  DEALS_DESCRIPTION,
+  DEALS_INTRO,
+  DEALS_PATH,
+  DEALS_TITLE,
+} from "@/lib/blackFriday";
+import { directOfferForProduct, directOffersInText, trackBrandUrl } from "@/lib/brandAffiliates";
+import {
   AMAZON_DISCLOSURE,
   AUTHOR_NAME,
   BRAND,
   NEWSLETTER_URL,
+  PRIVACY_UPDATED,
   RSS_DESCRIPTION,
   RSS_TITLE,
   SITE_UPDATED,
@@ -74,6 +86,7 @@ export function buildProductsJson(): string {
     description: product.description,
     image: product.image ? absoluteUrl(product.image) : null,
     buyUrl: buyUrl(product),
+    directUrl: directOfferForProduct(product)?.href ?? null,
     availability: product.availability,
     url: absoluteUrl(`/products/${product.slug}`),
   }));
@@ -103,6 +116,7 @@ export function buildProductsXml(): string {
         `<description>${xmlEscape(product.description)}</description>`,
         `<image>${xmlEscape(product.image ? absoluteUrl(product.image) : "")}</image>`,
         `<buyUrl>${xmlEscape(buyUrl(product))}</buyUrl>`,
+        `<directUrl>${xmlEscape(directOfferForProduct(product)?.href ?? "")}</directUrl>`,
         `<availability>${xmlEscape(product.availability)}</availability>`,
         `<url>${xmlEscape(absoluteUrl(`/products/${product.slug}`))}</url>`,
         "</product>",
@@ -134,6 +148,8 @@ export function buildHomeMarkdown(): string {
     "",
     ...QUIZ_RESULTS.flatMap((result) => [`### ${result.title} (${result.detail})`, "", result.body, ""]),
     `The newsletter is optional: ${NEWSLETTER_URL}`,
+    "",
+    `PFAS-free Black Friday deals: ${absoluteUrl(DEALS_PATH)}`,
     "",
     "## Impact by the numbers",
     "",
@@ -169,12 +185,52 @@ export function buildAboutMarkdown(): string {
 }
 
 export function buildPrivacyMarkdown(): string {
-  const lines = ["# Privacy Policy", "", `Last updated ${formatDate(SITE_UPDATED)}.`, ""];
+  const lines = ["# Privacy Policy", "", `Last updated ${formatDate(PRIVACY_UPDATED)}.`, ""];
   for (const section of PRIVACY_SECTIONS) {
     if (section.heading) lines.push(`## ${section.heading}`, "");
     for (const paragraph of section.paragraphs) lines.push(paragraph, "");
   }
   lines.push(`Canonical page: ${absoluteUrl("/privacy-policy")}`, "");
+  return lines.join("\n");
+}
+
+export function buildBlackFridayMarkdown(): string {
+  const lines = [
+    `# ${DEALS_TITLE}`,
+    "",
+    `Checked ${formatDate(DEALS_CHECKED)}.`,
+    "",
+    DEALS_DESCRIPTION,
+    "",
+    ...DEALS_INTRO.flatMap((paragraph) => [paragraph, ""]),
+    "## Related guides",
+    "",
+    ...DEAL_GUIDES.map((guide) => `- [${guide.label}](${absoluteUrl(guide.href)})`),
+    "",
+  ];
+
+  for (const group of DEAL_GROUPS) {
+    lines.push(`## ${group.category}`, "");
+    for (const row of group.rows) {
+      for (const slug of row.slugs) {
+        const product = getProduct(slug);
+        lines.push(`### ${product?.name ?? slug}`, "");
+        if (product) lines.push(`Directory: ${absoluteUrl(`/products/${product.slug}`)}`, "");
+        lines.push(`Deal: ${row.deal}`, "", row.detail, "");
+        if (row.sourceUrl) {
+          const label = row.sourceLabel ?? "Source";
+          lines.push(`Source: [${label}](${trackBrandUrl(row.sourceUrl)})`, "");
+        }
+        if (product) {
+          const direct = directOfferForProduct(product);
+          if (direct) lines.push(`Buy direct from ${direct.label}: ${direct.href}`, "");
+          lines.push(`Amazon: ${buyUrl(product)}`, "");
+        }
+      }
+    }
+  }
+
+  lines.push(faqBlock(BLACK_FRIDAY_FAQS), AMAZON_DISCLOSURE, "", `Canonical page: ${absoluteUrl(DEALS_PATH)}`, "");
   return lines.join("\n");
 }
 
@@ -190,7 +246,7 @@ export function buildCatalogMarkdown(): string {
   ];
   for (const product of getAllProducts()) {
     lines.push(
-      `- [${product.name}](${absoluteUrl(`/products/${product.slug}`)}) — ${product.brand ?? "Brand not listed"}, ${product.category}, ${product.availability}. Buy: ${buyUrl(product)}. Markdown: ${absoluteUrl(markdownPath(`/products/${product.slug}`))}`,
+      `- [${product.name}](${absoluteUrl(`/products/${product.slug}`)}) — ${product.brand ?? "Brand not listed"}, ${product.category}, ${product.availability}. Buy: ${buyUrl(product)}.${directOfferForProduct(product) ? ` Direct: ${directOfferForProduct(product)?.href}.` : ""} Markdown: ${absoluteUrl(markdownPath(`/products/${product.slug}`))}`,
     );
   }
   lines.push("", faqBlock(CATALOG_FAQS), `Canonical page: ${absoluteUrl("/non-toxic-products")}`, "");
@@ -245,7 +301,29 @@ export function buildPostMarkdown(slug: string): string | null {
     lines.push("## Questions from this guide", "");
     for (const faq of post.faqs) lines.push(`### ${faq.question}`, "", faq.answer, "");
   }
-  if (post.hasAffiliateLinks) lines.push(AMAZON_DISCLOSURE, "");
+  const offers = directOffersInText(post.body, getAllProducts());
+  if (offers.length) {
+    lines.push("## Buy direct from the brand", "");
+    for (const offer of offers) {
+      const product = offer.productSlug ? getProduct(offer.productSlug) : null;
+      if (product) {
+        lines.push(
+          `- [${product.name}](${absoluteUrl(`/products/${product.slug}`)}): [Buy direct from ${offer.label}](${offer.href}). Also on Amazon: ${buyUrl(product)}.`,
+        );
+      } else {
+        lines.push(`- [Buy direct from ${offer.label}](${offer.href})`);
+      }
+    }
+    lines.push("");
+    const promoKeys = new Set<string>();
+    for (const offer of offers) {
+      if (offer.promo && !promoKeys.has(offer.key)) {
+        promoKeys.add(offer.key);
+        lines.push(offer.promo, "");
+      }
+    }
+  }
+  if (post.hasAffiliateLinks || offers.length) lines.push(AMAZON_DISCLOSURE, "");
   lines.push(`Canonical page: ${absoluteUrl(`/post/${post.slug}`)}`, "");
   return lines.filter((line) => line !== null).join("\n");
 }
@@ -253,6 +331,7 @@ export function buildPostMarkdown(slug: string): string | null {
 export function buildProductMarkdown(slug: string): string | null {
   const product = getProduct(slug);
   if (!product) return null;
+  const direct = directOfferForProduct(product);
   const lines = [
     `# ${product.name}`,
     "",
@@ -262,11 +341,13 @@ export function buildProductMarkdown(slug: string): string | null {
     `- Category: ${product.category}${product.subcategory ? ` / ${product.subcategory}` : ""}`,
     `- ASIN: ${product.asin ?? "None. This entry is an Amazon list, not a single product."}`,
     `- Availability: ${product.availability}`,
-    `- Buy: ${buyUrl(product)}`,
+    `- Buy on Amazon: ${buyUrl(product)}`,
+    ...(direct ? [`- Buy direct from ${direct.label}: ${direct.href}`] : []),
     "",
     product.description,
     "",
   ];
+  if (direct?.promo) lines.push(direct.promo, "");
   if (product.features.length) {
     lines.push("## Features", "");
     for (const feature of product.features) lines.push(`- ${feature}`);
@@ -284,14 +365,20 @@ export function buildLlmsTxt(): string {
   const lines = [
     `# ${BRAND}`,
     "",
-    "> Guides to PFAS (forever chemicals) and a directory of products that link to Amazon. Buyers check out on Amazon. As an Amazon Associate I earn from qualifying purchases.",
+    "> Guides to PFAS (forever chemicals) and a directory of products. Buyers check out on Amazon, and on iSpring or Purewell when a direct button is present. As an Amazon Associate I earn from qualifying purchases. We earn commissions from Amazon and from brand partners such as iSpring and Purewell at no extra cost to you.",
     "",
     `Operated by FortuneCreations, LLC. Contact: nomoreforeverchemicals@gmail.com`,
     "",
     "## Key pages",
     linkLine("Home", "/", "PFAS overview, household quiz, and where forever chemicals show up."),
+    linkLine(DEALS_TITLE, DEALS_PATH, DEALS_DESCRIPTION),
+    linkLine(`${DEALS_TITLE} markdown`, markdownPath(DEALS_PATH)),
     linkLine("Home markdown", "/index.md"),
-    linkLine("Non-toxic products", "/non-toxic-products", "Amazon affiliate catalog."),
+    linkLine(
+      "Non-toxic products",
+      "/non-toxic-products",
+      "Product directory. Amazon links stay, and iSpring and Purewell also have direct brand links.",
+    ),
     linkLine("Non-toxic products markdown", markdownPath("/non-toxic-products")),
     linkLine("What is this site about?", "/what-is-this-site-about"),
     linkLine("About markdown", markdownPath("/what-is-this-site-about")),
@@ -314,7 +401,7 @@ export function buildLlmsTxt(): string {
       linkLine(
         product.name,
         `/products/${product.slug}`,
-        `${product.brand ?? "Brand not listed"}. ${product.category}. ${product.availability}. Buy: ${buyUrl(product)}`,
+        `${product.brand ?? "Brand not listed"}. ${product.category}. ${product.availability}. Buy: ${buyUrl(product)}${directOfferForProduct(product) ? `. Direct: ${directOfferForProduct(product)?.href}` : ""}`,
       ),
     );
     lines.push(linkLine(`${product.name} (markdown)`, markdownPath(`/products/${product.slug}`)));

@@ -9,7 +9,7 @@ import { pageMetadata } from "@/lib/seo";
 export const metadata = pageMetadata({
   title: "What is this site about?",
   description:
-    "No More Forever Chemicals explains PFAS, where they show up at home, and which Amazon listings the guides recommend. Operated by FortuneCreations, LLC.",
+    "No More Forever Chemicals explains PFAS, where they show up at home, and which product listings the guides recommend. Operated by FortuneCreations, LLC.",
   path: "/what-is-this-site-about",
 });
 

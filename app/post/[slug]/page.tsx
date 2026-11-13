@@ -7,7 +7,12 @@ import { Disclosure } from "@/components/Disclosure";
 import { FaqList } from "@/components/FaqList";
 import { JsonLd } from "@/components/JsonLd";
 import { Markdown } from "@/components/Markdown";
+import { PostBrandOffers } from "@/components/PostBrandOffers";
+import { SeasonalDealBanner } from "@/components/SeasonalDealLink";
+import { directOffersInText } from "@/lib/brandAffiliates";
 import { NEWSLETTER_URL } from "@/lib/constants";
+import { getAllProducts } from "@/lib/products";
+import { isBlackFridayPost } from "@/lib/seasonal";
 import { formatDate, readingMinutes } from "@/lib/format";
 import { categorySlug, getAllPosts, getPost } from "@/lib/posts";
 import { blogPostingJsonLd } from "@/lib/schema";
@@ -41,6 +46,8 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
   const post = getPost(slug);
   if (!post) notFound();
   const minutes = readingMinutes(post.body);
+  const brandOffers = directOffersInText(post.body, getAllProducts());
+  const showDisclosure = post.hasAffiliateLinks || brandOffers.length > 0;
   const crumbs = [
     { name: "Blog", href: "/blog" },
     ...(post.category
@@ -81,7 +88,11 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
         />
       ) : null}
 
-      {post.hasAffiliateLinks ? <Disclosure className="mt-6 rounded-2xl bg-beige p-4" /> : null}
+      {showDisclosure ? <Disclosure className="mt-6 rounded-2xl bg-beige p-4" /> : null}
+
+      {isBlackFridayPost(post.slug) ? <SeasonalDealBanner /> : null}
+
+      <PostBrandOffers text={post.body} />
 
       {post.takeaways.length ? (
         <section className="mt-6 rounded-3xl border border-line bg-white p-5">

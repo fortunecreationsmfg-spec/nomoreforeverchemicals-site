@@ -1,9 +1,12 @@
 import Image from "next/image";
 import Link from "next/link";
+import { AffiliateButtons } from "@/components/AffiliateButtons";
+import { directOfferForProduct } from "@/lib/brandAffiliates";
 import type { Product } from "@/lib/products";
 
 export function ProductCard({ product }: { product: Product }) {
   const unavailable = product.availability === "unavailable";
+  const direct = directOfferForProduct(product);
 
   return (
     <article className="flex h-full flex-col overflow-hidden rounded-3xl border border-line bg-white">
@@ -33,6 +36,12 @@ export function ProductCard({ product }: { product: Product }) {
           <p className="mt-3 inline-flex w-fit rounded-full bg-peach px-2.5 py-1 text-xs font-semibold text-forest">
             Currently unavailable
           </p>
+        ) : null}
+        {direct ? (
+          <div className="mt-4">
+            <AffiliateButtons product={product} stacked />
+            {direct.cardNote ? <p className="mt-2 text-xs leading-5 text-muted">{direct.cardNote}</p> : null}
+          </div>
         ) : null}
         <Link href={`/products/${product.slug}`} className="mt-4 text-sm font-semibold text-forest underline decoration-teal underline-offset-4">
           View details

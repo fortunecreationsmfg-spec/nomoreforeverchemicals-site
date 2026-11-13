@@ -47,7 +47,7 @@ function readPost(file: string): Post {
     body,
     takeaways: frontmatterTakeaways.length >= 2 ? frontmatterTakeaways : deriveTakeaways(body),
     faqs: extractFaqs(body),
-    hasAffiliateLinks: /amazon\.com|amzn\.to/i.test(body),
+    hasAffiliateLinks: /amazon\.com|amzn\.to|ispringfilter\.com|purewell\.com|partnerboost\.com/i.test(body),
   };
 }
 
