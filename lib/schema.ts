@@ -128,11 +128,11 @@ export function productJsonLd(product: Product) {
   };
 }
 
-export function itemListJsonLd(products: Product[]) {
+export function itemListJsonLd(products: Product[], name = "Non-toxic products") {
   return {
     "@context": "https://schema.org",
     "@type": "ItemList",
-    name: "Non-toxic products",
+    name,
     itemListOrder: "https://schema.org/ItemListOrderAscending",
     numberOfItems: products.length,
     itemListElement: products.map((product, index) => ({
