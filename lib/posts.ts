@@ -19,6 +19,7 @@ export type Post = {
   takeaways: string[];
   faqs: Faq[];
   hasAffiliateLinks: boolean;
+  productSlugs: string[];
 };
 
 export type Category = {
@@ -48,6 +49,9 @@ function readPost(file: string): Post {
     takeaways: frontmatterTakeaways.length >= 2 ? frontmatterTakeaways : deriveTakeaways(body),
     faqs: extractFaqs(body),
     hasAffiliateLinks: /amazon\.com|amzn\.to|ispringfilter\.com|purewell\.com|partnerboost\.com/i.test(body),
+    productSlugs: Array.isArray(parsed.data.products)
+      ? parsed.data.products.map(String).filter(Boolean)
+      : [],
   };
 }
 
