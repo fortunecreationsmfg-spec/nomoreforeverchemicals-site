@@ -4,8 +4,17 @@ import type { ReactNode } from "react";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import remarkGfm from "remark-gfm";
 import { withAmazonTag } from "@/lib/amazon";
-import { isSponsoredHref, trackBrandUrl } from "@/lib/brandAffiliates";
+import { isSponsoredHref, SPONSORED_REL, trackBrandUrl } from "@/lib/brandAffiliates";
 import { imageMeta } from "@/lib/image-meta";
+
+export function BuyButton({ href, children }: { href: string; children?: ReactNode }) {
+  const url = trackBrandUrl(withAmazonTag(href));
+  return (
+    <a href={url} className="btn-primary" target="_blank" rel={SPONSORED_REL}>
+      {children}
+    </a>
+  );
+}
 
 function MdLink({ href, children }: { href?: string; children?: ReactNode }) {
   if (!href) return <span>{children}</span>;
@@ -50,7 +59,7 @@ export function Markdown({ source }: { source: string }) {
       <MDXRemote
         source={source}
         options={{ mdxOptions: { remarkPlugins: [remarkGfm] } }}
-        components={{ a: MdLink, img: MdImage }}
+        components={{ a: MdLink, img: MdImage, BuyButton }}
       />
     </div>
   );

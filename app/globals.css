@@ -147,6 +147,12 @@ html[data-deals-banner="off"] .deals-banner {
   text-underline-offset: 3px;
 }
 
+.markdown a.btn-primary,
+.markdown a.btn-secondary {
+  color: var(--forest);
+  text-decoration: none;
+}
+
 .markdown ul,
 .markdown ol {
   padding-left: 1.25rem;

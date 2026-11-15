@@ -6,6 +6,7 @@ import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { Disclosure } from "@/components/Disclosure";
 import { JsonLd } from "@/components/JsonLd";
 import { AffiliateButtons } from "@/components/AffiliateButtons";
+import { buyUrl } from "@/lib/amazon";
 import { directOfferForProduct } from "@/lib/brandAffiliates";
 import { SITE_UPDATED } from "@/lib/constants";
 import { formatDate } from "@/lib/format";
@@ -41,6 +42,7 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
   if (!product) notFound();
   const direct = directOfferForProduct(product);
   const unavailable = product.availability === "unavailable";
+  const opensAmazonSearch = buyUrl(product).includes("/s?");
 
   return (
     <article className="mx-auto max-w-6xl px-4 py-10 sm:px-6">
@@ -104,7 +106,9 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
             <p className="mt-4 rounded-2xl bg-peach px-4 py-3 text-sm leading-6">
               {direct
                 ? "This listing was marked unavailable on Amazon when the catalog was compiled on October 7, 2026. The brand button opens the maker's site. The Amazon button opens the listing so you can check current stock."
-                : "Marked unavailable on Amazon when this catalog was compiled on October 7, 2026. The button still opens Amazon so you can check the live listing."}
+                : opensAmazonSearch
+                  ? "Marked unavailable on Amazon when this catalog was compiled on October 7, 2026. The button opens an Amazon search for this product so you can see current listings."
+                  : "Marked unavailable on Amazon when this catalog was compiled on October 7, 2026. The button still opens Amazon so you can check the live listing."}
             </p>
           ) : null}
           {product.labelNote ? <p className="mt-4 text-sm leading-6 text-muted">{product.labelNote}</p> : null}
