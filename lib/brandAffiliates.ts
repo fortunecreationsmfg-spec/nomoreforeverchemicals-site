@@ -89,9 +89,9 @@ export const brandAffiliates: Record<string, BrandAffiliate> = {
     enabled: true,
     aliases: ["iSpring", "ispring"],
     baseUrl: ISPRING_HOME,
-    cardNote: "New customers: 10% off a first system with code REFISPRING.",
+    cardNote: "Holiday sale through November 30, 2026: $60 off $300+, $120 off $600+, $200 off $1,000+. No code on the sale page.",
     promo:
-      "New customers can take 10% off a first iSpring filtration system with code REFISPRING. It requires a new-customer account, works on one order, and cannot be combined with other promotions. iSpring's site, checked November 13, 2026, also runs a holiday sale through November 30, 2026: $60 off orders of $300 or more, $120 off orders of $600 or more, and $200 off orders of $1,000 or more, plus 30-day price protection. Prices change. Check the store.",
+      "Verified Nov 20, 2026 on ispringfilter.com. The holiday sale runs November 9 through November 30, 2026: $60 off orders of $300 or more, $120 off orders of $600 or more, and $200 off orders of $1,000 or more, plus 30-day price protection. The sitewide banner read “Up to $200 Off Sitewide,” and the Black Friday sale page said no code is needed. Prices change. Check the store.",
     products: {
       "under-sink-reverse-osmosis-filter": {
         url: "https://www.ispringfilter.com/products/ispring-6-stage-75-gpd-high-capacity-under-sink-reverse-osmosis-drinking-water-filter-system-with-alkaline-remineralization",
@@ -110,9 +110,9 @@ export const brandAffiliates: Record<string, BrandAffiliate> = {
     enabled: true,
     aliases: ["Purewell", "purewell"],
     baseUrl: PUREWELL_HOME,
-    cardNote: "Offers through December 31, 2026 are on Purewell's site. No code is published here.",
+    cardNote: "No public discount was on purewell.com on November 20, 2026. Check today's price.",
     promo:
-      "Through December 31, 2026, Purewell offers 20% off Purewell Home countertop filtration systems, 15% off a first order for new customers, and $60 off orders of $300 or more. The offers are on Purewell's site. This site does not publish a code. On November 13, 2026, purewell.com showed no Black Friday banner, and the SF Series product page was marked 0% off. Prices change. Check the store.",
+      "Verified Nov 20, 2026. purewell.com had no Black Friday or Cyber Monday banner. The SF Series 2.25-gallon page listed $179.99 with the compare-at price equal to $179.99. This site does not list a Purewell code or percentage. Prices change. Check the store.",
     products: {
       "countertop-gravity-filter": {
         url: "https://www.purewell.com/en-us/products/sf-series-countertop-gravity-water-filter-system-2-25-gallons-us",
