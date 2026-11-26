@@ -1,3 +1,5 @@
+import { NEWSLETTER_URL } from "@/lib/constants";
+
 /**
  * AppLovin Axon pixel (native JS).
  * Snippet: https://support.applovin.com/en/growth/promoting-your-websites/track-and-optimize/axon-pixel-native-js
@@ -23,8 +25,41 @@ axon("init",{historyObserver:false});
 /** Required generate_lead fields: currency (ISO 4217) and value (number). */
 export const AXON_LEAD_PARAMS = { currency: "USD", value: 1 } as const;
 
-/** Once per browser-tab visit, so a refresh is not a second lead. */
+/** Once per browser-tab visit on /newsletter/thanks, so a refresh is not a second lead. */
 export const AXON_LEAD_STORAGE_KEY = "nmfc-axon-generate-lead";
+
+/** Once per tab session for a click that opens the Beehiiv signup. Separate from the thank-you page. */
+export const AXON_CLICK_LEAD_STORAGE_KEY = "nmfc-axon-newsletter-click-lead";
+
+const newsletterHost = new URL(NEWSLETTER_URL).hostname;
+
+/** True for the Beehiiv signup URL, including a trailing slash. */
+export function isNewsletterSignupHref(href: string, base: string): boolean {
+  try {
+    const url = new URL(href, base);
+    return url.hostname === newsletterHost && (url.pathname === "/" || url.pathname === "");
+  } catch {
+    return false;
+  }
+}
+
+let clickLeadSent = false;
+
+/** Call from the click handler, before the browser follows the link. */
+export function trackNewsletterClickLead(): void {
+  if (clickLeadSent) return;
+  try {
+    if (sessionStorage.getItem(AXON_CLICK_LEAD_STORAGE_KEY) === "1") {
+      clickLeadSent = true;
+      return;
+    }
+    sessionStorage.setItem(AXON_CLICK_LEAD_STORAGE_KEY, "1");
+  } catch {
+    // Storage can be blocked. The module flag still limits this page load.
+  }
+  clickLeadSent = true;
+  trackGenerateLead();
+}
 
 type AxonFn = {
   (command: "init"): void;

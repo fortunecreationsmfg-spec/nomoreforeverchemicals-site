@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Bricolage_Grotesque, Onest } from "next/font/google";
 import Script from "next/script";
 import { Analytics } from "@vercel/analytics/next";
+import { AxonNewsletterClick } from "@/components/AxonNewsletterClick";
 import { AxonPageView } from "@/components/AxonPageView";
 import { JsonLd } from "@/components/JsonLd";
 import { SiteShell } from "@/components/SiteShell";
@@ -88,6 +89,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <JsonLd data={organizationJsonLd()} />
         <SiteShell>{children}</SiteShell>
         <AxonPageView />
+        <AxonNewsletterClick />
         <Analytics />
       </body>
     </html>
