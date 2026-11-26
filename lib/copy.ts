@@ -216,7 +216,7 @@ export const PRIVACY_SECTIONS: CopySection[] = [
   {
     paragraphs: [
       "No More Forever Chemicals is a website operated by FortuneCreations, LLC (\"we\"). The site publishes guides about PFAS and links to products on Amazon and, for iSpring and Purewell, on the brand's own site. It also points to an optional newsletter hosted by beehiiv. This policy explains what happens when you read the site, email us, or follow those links.",
-      "Last updated November 13, 2026.",
+      "Last updated November 26, 2026.",
     ],
   },
   {
@@ -226,6 +226,7 @@ export const PRIVACY_SECTIONS: CopySection[] = [
       "If you email nomoreforeverchemicals@gmail.com, we receive the address you write from and whatever you include in the message.",
       "The newsletter signup is not a form on this site. It opens https://nomoreforeverchemicals.beehiiv.com, where beehiiv collects the email address you submit under beehiiv's own policy.",
       "Vercel Analytics records aggregated visit data such as pages viewed, referring pages, and browser type. We use it to see which guides are useful. We do not use it to build a profile of you, and the site does not show a cookie wall or an interstitial.",
+      "An AppLovin advertising pixel loads on each page. It records page views and, on the newsletter thank-you page, one lead event, so we can measure ad performance. It does not receive the email address you submit to beehiiv.",
     ],
   },
   {
@@ -238,19 +239,19 @@ export const PRIVACY_SECTIONS: CopySection[] = [
   {
     heading: "How we use information",
     paragraphs: [
-      "We use messages you send in order to reply. We use aggregated analytics to understand which pages are read. We do not sell personal information. We do not use your information for automated profiling.",
+      "We use messages you send in order to reply. We use aggregated analytics to understand which pages are read, and the AppLovin pixel to measure ad performance. We do not sell personal information. We do not use your information for automated profiling.",
     ],
   },
   {
     heading: "Sharing",
     paragraphs: [
-      "We share information only with the services that make the site work, and only for that purpose: Vercel hosts the site and provides analytics (https://vercel.com/legal/privacy-policy), Amazon receives affiliate click-throughs, iSpring and Purewell (through PartnerBoost) receive brand-affiliate click-throughs, and beehiiv receives newsletter signups that you submit on the beehiiv site. We may also share information if the law requires it, or if FortuneCreations, LLC is sold and the website transfers with it.",
+      "We share information only with the services that make the site work, and only for that purpose: Vercel hosts the site and provides analytics (https://vercel.com/legal/privacy-policy), AppLovin receives the advertising-pixel events described above (https://legal.applovin.com/privacy-policy), Amazon receives affiliate click-throughs, iSpring and Purewell (through PartnerBoost) receive brand-affiliate click-throughs, and beehiiv receives newsletter signups that you submit on the beehiiv site. We may also share information if the law requires it, or if FortuneCreations, LLC is sold and the website transfers with it.",
     ],
   },
   {
     heading: "Cookies",
     paragraphs: [
-      "This site does not set advertising cookies and does not ask you to accept a cookie banner before you can read. Your browser, Vercel Analytics, and the third-party sites you choose to open (Amazon, iSpring, Purewell, PartnerBoost, and beehiiv) may store their own technical data. You can block cookies in your browser.",
+      "This site loads an AppLovin advertising pixel to measure ad performance. AppLovin may set a cookie or a similar identifier. The site does not ask you to accept a cookie banner before you can read. Your browser, Vercel Analytics, and the third-party sites you choose to open (Amazon, iSpring, Purewell, PartnerBoost, and beehiiv) may store their own technical data. You can block cookies in your browser.",
     ],
   },
   {
@@ -262,7 +263,7 @@ export const PRIVACY_SECTIONS: CopySection[] = [
   {
     heading: "Your choices",
     paragraphs: [
-      "You can skip the newsletter. If you subscribed on beehiiv, unsubscribe there. You can email nomoreforeverchemicals@gmail.com to ask about a message you sent us. You can stop analytics cookies by blocking them in your browser or by using a private-browsing mode.",
+      "You can skip the newsletter. If you subscribed on beehiiv, unsubscribe there. You can email nomoreforeverchemicals@gmail.com to ask about a message you sent us. You can block the AppLovin pixel and analytics cookies in your browser or by using a private-browsing mode.",
     ],
   },
   {

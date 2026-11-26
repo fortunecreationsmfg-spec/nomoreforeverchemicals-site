@@ -1,8 +1,11 @@
 import type { Metadata, Viewport } from "next";
 import { Bricolage_Grotesque, Onest } from "next/font/google";
+import Script from "next/script";
 import { Analytics } from "@vercel/analytics/next";
+import { AxonPageView } from "@/components/AxonPageView";
 import { JsonLd } from "@/components/JsonLd";
 import { SiteShell } from "@/components/SiteShell";
+import { AXON_PIXEL_BOOT } from "@/lib/axon";
 import { BRAND, CONTACT_EMAIL, DEFAULT_OG_IMAGE, LEGAL_NAME, SITE_URL } from "@/lib/constants";
 import { organizationJsonLd } from "@/lib/schema";
 import { announcementBootScript, announcementPhase } from "@/lib/seasonal";
@@ -77,10 +80,14 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         {showAnnouncement ? (
           <script id="deals-banner-boot" dangerouslySetInnerHTML={{ __html: announcementBootScript() }} />
         ) : null}
+        <Script id="axon-pixel" strategy="beforeInteractive">
+          {AXON_PIXEL_BOOT}
+        </Script>
       </head>
       <body className="flex min-h-full flex-col bg-cream font-sans text-forest">
         <JsonLd data={organizationJsonLd()} />
         <SiteShell>{children}</SiteShell>
+        <AxonPageView />
         <Analytics />
       </body>
     </html>
