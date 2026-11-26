@@ -8,7 +8,7 @@ import { pageMetadata } from "@/lib/seo";
 export const metadata = pageMetadata({
   title: "Privacy Policy",
   description:
-    "Privacy policy for No More Forever Chemicals, operated by FortuneCreations, LLC. The site links to Amazon and to brand partners such as iSpring and Purewell, with an optional beehiiv newsletter and Vercel Analytics.",
+    "Privacy policy for No More Forever Chemicals, operated by FortuneCreations, LLC. The site links to Amazon and to brand partners such as iSpring and Purewell, with an optional beehiiv newsletter, Vercel Analytics, and an AppLovin advertising pixel.",
   path: "/privacy-policy",
 });
 
