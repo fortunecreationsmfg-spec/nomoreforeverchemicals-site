@@ -226,7 +226,7 @@ export const PRIVACY_SECTIONS: CopySection[] = [
       "If you email nomoreforeverchemicals@gmail.com, we receive the address you write from and whatever you include in the message.",
       "The newsletter signup is not a form on this site. It opens https://nomoreforeverchemicals.beehiiv.com, where beehiiv collects the email address you submit under beehiiv's own policy.",
       "Vercel Analytics records aggregated visit data such as pages viewed, referring pages, and browser type. We use it to see which guides are useful. We do not use it to build a profile of you, and the site does not show a cookie wall or an interstitial.",
-      "An AppLovin advertising pixel loads on each page. It records page views and, on the newsletter thank-you page, one lead event, so we can measure ad performance. It does not receive the email address you submit to beehiiv.",
+      "An AppLovin advertising pixel loads on each page. It records page views, and one lead event when you click a newsletter signup link. The newsletter thank-you page records a lead event as well. We use those events to measure ad performance. It does not receive the email address you submit to beehiiv.",
     ],
   },
   {

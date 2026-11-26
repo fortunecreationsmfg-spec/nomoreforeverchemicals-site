@@ -6,9 +6,8 @@ import { AXON_LEAD_STORAGE_KEY, trackGenerateLead } from "@/lib/axon";
 let leadSent = false;
 
 /**
- * Newsletter signups finish on beehiiv, which redirects here.
- * generate_lead requires currency and value, and is not sent again on a
- * refresh in the same tab.
+ * Direct visits still send generate_lead once per tab.
+ * Beehiiv does not redirect subscribers here, so signup clicks are tracked separately.
  */
 export function AxonGenerateLead() {
   useEffect(() => {
