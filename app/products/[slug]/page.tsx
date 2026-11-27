@@ -104,14 +104,18 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
           </dl>
           {unavailable ? (
             <p className="mt-4 rounded-2xl bg-peach px-4 py-3 text-sm leading-6">
-              {direct
-                ? "This listing was marked unavailable on Amazon when the catalog was compiled on October 7, 2026. The brand button opens the maker's site. The Amazon button opens the listing so you can check current stock."
-                : opensAmazonSearch
-                  ? "Marked unavailable on Amazon when this catalog was compiled on October 7, 2026. The button opens an Amazon search for this product so you can see current listings."
-                  : "Marked unavailable on Amazon when this catalog was compiled on October 7, 2026. The button still opens Amazon so you can check the live listing."}
+              {product.labelNote
+                ? product.labelNote
+                : direct
+                  ? "This listing was marked unavailable on Amazon when the catalog was compiled on October 7, 2026. The brand button opens the maker's site. The Amazon button opens the listing so you can check current stock."
+                  : opensAmazonSearch
+                    ? "Marked unavailable on Amazon when this catalog was compiled on October 7, 2026. The button opens an Amazon search for this product so you can see current listings."
+                    : "Marked unavailable on Amazon when this catalog was compiled on October 7, 2026. The button still opens Amazon so you can check the live listing."}
             </p>
           ) : null}
-          {product.labelNote ? <p className="mt-4 text-sm leading-6 text-muted">{product.labelNote}</p> : null}
+          {product.labelNote && !unavailable ? (
+            <p className="mt-4 text-sm leading-6 text-muted">{product.labelNote}</p>
+          ) : null}
           <p className="mt-4 leading-7">{product.description}</p>
           <div className="mt-6">
             <AffiliateButtons product={product} fallback />
