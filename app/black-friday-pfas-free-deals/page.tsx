@@ -14,6 +14,7 @@ import {
   DEALS_TITLE,
   type DealRow,
 } from "@/lib/blackFriday";
+import { axonItemDataset } from "@/lib/axon";
 import { isSponsoredHref, SPONSORED_REL, trackBrandUrl } from "@/lib/brandAffiliates";
 import { formatDate } from "@/lib/format";
 import { getProduct, type Product } from "@/lib/products";
@@ -66,7 +67,7 @@ function ProductName({ product }: { product: Product }) {
 
 function DealCard({ product, row }: { product: Product; row: DealRow }) {
   return (
-    <article className="rounded-3xl border border-line bg-white p-4">
+    <article className="rounded-3xl border border-line bg-white p-4" data-axon-view-item="" {...axonItemDataset(product)}>
       <ProductName product={product} />
       <div className="mt-3 text-sm">
         <DealCopy row={row} />
@@ -143,7 +144,7 @@ export default function BlackFridayDealsPage() {
                 <tbody>
                   {items.map(({ row, product }) => (
                     <tr key={product.slug} className="border-t border-line align-top">
-                      <th scope="row" className="px-4 py-4 font-normal">
+                      <th scope="row" className="px-4 py-4 font-normal" data-axon-view-item="" {...axonItemDataset(product)}>
                         <ProductName product={product} />
                       </th>
                       <td className="px-4 py-4">

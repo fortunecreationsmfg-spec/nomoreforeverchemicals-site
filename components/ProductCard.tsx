@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { AffiliateButtons } from "@/components/AffiliateButtons";
+import { axonItemDataset } from "@/lib/axon";
 import { directOfferForProduct } from "@/lib/brandAffiliates";
 import type { Product } from "@/lib/products";
 
@@ -9,7 +10,11 @@ export function ProductCard({ product }: { product: Product }) {
   const direct = directOfferForProduct(product);
 
   return (
-    <article className="flex h-full flex-col overflow-hidden rounded-3xl border border-line bg-white">
+    <article
+      className="flex h-full flex-col overflow-hidden rounded-3xl border border-line bg-white"
+      data-axon-view-item=""
+      {...axonItemDataset(product)}
+    >
       <Link href={`/products/${product.slug}`} className="block bg-beige">
         {product.image ? (
           <Image
