@@ -1,4 +1,5 @@
 import { buyUrl } from "@/lib/amazon";
+import { axonItemDataset } from "@/lib/axon";
 import { directOfferForProduct, SPONSORED_REL } from "@/lib/brandAffiliates";
 import type { Product } from "@/lib/products";
 
@@ -16,6 +17,7 @@ export function AffiliateButtons({
   if (!direct && !fallback) return null;
 
   const unavailable = product.availability === "unavailable";
+  const itemProps = axonItemDataset(product);
   const amazonLabel = direct
     ? "Also on Amazon"
     : product.asin
@@ -33,6 +35,7 @@ export function AffiliateButtons({
           className={`btn-primary ${width}`}
           target="_blank"
           rel={SPONSORED_REL}
+          {...itemProps}
         >
           Buy direct from {direct.label}
         </a>
@@ -42,6 +45,7 @@ export function AffiliateButtons({
         className={`${direct ? "btn-secondary" : "btn-primary"} ${width}`}
         target="_blank"
         rel={SPONSORED_REL}
+        {...itemProps}
       >
         {amazonLabel}
       </a>

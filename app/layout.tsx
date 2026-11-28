@@ -3,7 +3,9 @@ import { Bricolage_Grotesque, Onest } from "next/font/google";
 import Script from "next/script";
 import { Analytics } from "@vercel/analytics/next";
 import { AxonNewsletterClick } from "@/components/AxonNewsletterClick";
+import { AxonOutboundClick } from "@/components/AxonOutboundClick";
 import { AxonPageView } from "@/components/AxonPageView";
+import { AxonViewItem } from "@/components/AxonViewItem";
 import { JsonLd } from "@/components/JsonLd";
 import { SiteShell } from "@/components/SiteShell";
 import { AXON_PIXEL_BOOT } from "@/lib/axon";
@@ -90,6 +92,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <SiteShell>{children}</SiteShell>
         <AxonPageView />
         <AxonNewsletterClick />
+        <AxonOutboundClick />
+        <AxonViewItem />
         <Analytics />
       </body>
     </html>
